@@ -230,6 +230,11 @@ func uploadImagesJob(r *RepositoryAPIV1, jobId int64) error {
 	log.Debugf("imageLoaded: %v", imageLoaded)
 
 	imageLoadedRepo := strings.TrimSpace((strings.Split(imageLoaded, ":"))[0])
+
+	// split '/' if needed
+	imageLoadedRepoSplited := strings.Split(imageLoadedRepo, "/")
+	imageLoadedRepo = imageLoadedRepoSplited[len(imageLoadedRepoSplited)-1]
+
 	imageLoadedTag := strings.TrimSpace((strings.Split(imageLoaded, ":"))[1])
 
 	log.Debugf("imageLoaded ok, repo: %v, tag: %v", imageLoadedRepo, imageLoadedTag)
